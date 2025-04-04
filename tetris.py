@@ -6,7 +6,11 @@ import numpy as np
 import itertools
 from collections import defaultdict
 import pprint
-#from game_loop import game_loop
+
+
+################################################################################################
+#                       CONFIGURATIONS                                                         #             
+################################################################################################
 
 game_speed = 5
 
@@ -38,6 +42,11 @@ block_sz = 20, 20
 
 ### FONT FOR DEBUGGING PIECE PLACES
 debug_font = pygame.font.SysFont('arial', 8)
+
+################################################################################################
+#                       SET UP FUNCTIONS                                                       #             
+################################################################################################
+
 
 ## Function to finish the game
 def game_over():
@@ -117,10 +126,6 @@ pieces_list = []
 ## coordenates of each piece for better accessing
 pieces_places = []
 
-
-
-game_state = 'RUNNING'
-
 def instructions():
     small_text = pygame.font.SysFont("arial", 20)
     text_surface1 = small_text.render("← → ↓: Move", True, white)
@@ -134,13 +139,14 @@ def instructions():
     game_window.blit(text_surface3, text_rect3)
     
 
-#def complete_line():
-#    'd' in [ i for i in pieces_places for j in i ]
 
+game_state = 'RUNNING'
 
 while True:
-    #print(pieces_places) 
 
+################################################################################################
+#                       CONTROL SECTION                                                        #             
+################################################################################################
     
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
@@ -215,6 +221,11 @@ while True:
                 #change_to = 'DOWN'
                 game_speed = game_speed/4
 
+################################################################################################
+#                       MAIN GAME LOOP                                                         #             
+################################################################################################
+
+
     if game_state == 'RUNNING':
 
 
@@ -227,6 +238,7 @@ while True:
 
 
         #### TO DO - Investigate what is wrong with the bottom touching logic
+        #### HINTS: seems to be something regarding the movement left to right?
         ## mapping function: returns true if pieces are touching eachother (bugged, some pieces won't stop, seems kind of random)
         not_touching_list = list(map(lambda x : list(map(check_touch, x)), pieces_places))
 
@@ -305,19 +317,18 @@ while True:
                           
                             if piece_removed and new_len >= 1:
                                 for index in range(0,new_len-1):
-                                    while piece['loc'][index][1] != window_y-piece['size'] and not any(pieces_places) ==piece ['loc'][index][1] + piece['size']:
+                                    while piece['loc'][index][1] != window_y-piece['size'] and not any(pieces_places) == piece ['loc'][index][1] + piece['size']:
                                         piece['loc'][index][1] += piece['size']
                     if piece_removed and len(piece['loc']) == 4:
                     #new_len = len(piece['loc'])
-                        while piece['loc'][3][1] != window_y and not any(pieces_places) ==piece['loc'][3][1] +  piece['size']:
+                        while piece['loc'][3][1] != window_y and not any(pieces_places) == piece['loc'][3][1] +piece['size']:
+                            print(f'argument 1 {[0,piece["size"]]}')
+                            print(f'argument 2 {piece["loc"]}')
                             new_value = [0,piece['size']]
-                            piece['loc'] = map(lambda x : np.add(piece['loc'],new_value))
+                            piece['loc'] = list(map(lambda x : np.add(piece['loc'],new_value),piece['loc']))
 
         is_line_complete()
         clean_line()
-
-
-        ###
 
             ## FALLING MECHANIC: if nothing is touching, then piece will fall.
         if not_bottom and not touching:
@@ -328,6 +339,11 @@ while True:
             pieces_list.append(my_piece)
             my_piece = new_piece()
             change_shape(my_piece, (window_x/2), 0)
+
+################################################################################################
+#                       DRAWING SECTION                                                        #             
+################################################################################################
+
 
         def draw_text(text, font, color, surface, x, y):
             textobj = font.render(text, True, color)
@@ -351,7 +367,9 @@ while True:
         pygame.display.update()
         fps.tick(game_speed)
 
-
+################################################################################################
+#                       PAUSE SECTION                                                          #             
+################################################################################################
     
     elif game_state == 'PAUSED':
            #screen = pygame.display.set_mode((200, 200))
