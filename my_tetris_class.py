@@ -1,23 +1,22 @@
 
 #my_piece = {'shape':'L', 'place':0, 'size' : 20, 'color' : 'black', 'loc':[[0,0],[0,0],[0,0],[0,0]], "full_size":0}
 
-def change_shape(self):
-        self["loc"] = [[self["place"],self["size"]],[self["place"],self["size"]],[self["place"],self["size"]],[self["place"],self["size"]]]
+def change_shape(self, placex=0,placey=0):
+        #self["place"] = self["loc"][0][0]
+        self["loc"] = [[placex,placey],[placex,placey],[placex,placey],[placex,placey]]
         if self["shape"] == 'L' and self["rotate"] == 1:
-            self["loc"][0] = self["loc"][0]
-            self["loc"][1][1] += self["size"]
-            self["loc"][2][1] += self["size"]*2
+            self["loc"][1][1] -= self["size"]
+            self["loc"][2][1] -= self["size"]*2
             self["loc"][3][0] += self["size"]
-            self["loc"][3][1] += self["size"]*2
+            #self["loc"][3][1] += self["size"]
         if self["shape"] == 'L' and self["rotate"] == 2:
-            self["loc"][0][0] += self["size"]*2
-            self["loc"][1][1] += self["size"]
-            self["loc"][2][0] += self["size"]
-            self["loc"][2][1] += self["size"]
+            self["loc"][1][0] += self["size"]
+            self["loc"][2][0] += self["size"]*2
+            self["loc"][2][1] -= self["size"]
             self["loc"][3][0] += self["size"]*2
-            self["loc"][3][1] += self["size"]
+            #self["loc"][3][1] += self["size"]
         if self["shape"] == 'L' and self["rotate"] == 3:
-            self["loc"][0] = self["loc"][0]
+            #self["loc"][0] = self["loc"][0]
             self["loc"][1][0] += self["size"]
             self["loc"][2][0] += self["size"]
             self["loc"][2][1] += self["size"]
@@ -25,9 +24,9 @@ def change_shape(self):
             self["loc"][3][0] += self["size"]
         if self["shape"] == 'L' and self["rotate"] == 4:
             self["loc"][0] = self["loc"][0]
-            self["loc"][1][0] += self["size"]
-            self["loc"][2][0] += self["size"]*2
-            self["loc"][3][1] += self["size"]
+            self["loc"][1][1] += self["size"]
+            self["loc"][2][0] += self["size"]
+            self["loc"][3][0] += self["size"]*2
         if self["shape"] == 'O':
             self["loc"][0] = self["loc"][0]
             self["loc"][1][0] += self["size"]
@@ -35,38 +34,40 @@ def change_shape(self):
             self["loc"][3][0] += self["size"]
             self["loc"][3][1] += self["size"]
         if self["shape"] == 'S' and self["rotate"] == 1:
-            self["loc"][0] = self["loc"][0]
+            #self["loc"][0] = self["loc"][0]
             self["loc"][1][1] += self["size"]
             self["loc"][2][0] += self["size"]
             self["loc"][2][1] += self["size"]
             self["loc"][3][0] += self["size"]
             self["loc"][3][1] += self["size"]*2
         if self["shape"] == 'S' and self["rotate"] == 2:
-            self["loc"][0][0] += self["size"]
-            self["loc"][1][0] += self["size"]*2
-            self["loc"][2][1] += self["size"]
+            #self["loc"][0][0] += self["size"]
             self["loc"][3][0] += self["size"]
-            self["loc"][3][1] += self["size"]
-        if self["shape"] == 'Z' and self["rotate"] == 1:
-            self["loc"][0][0] += self["size"]
+            self["loc"][1][1] -= self["size"]
             self["loc"][1][0] += self["size"]
-            self["loc"][1][1] += self["size"]
-            self["loc"][2][1] += self["size"]
-            self["loc"][3][1] += self["size"]*2
+            self["loc"][2][1] -= self["size"]
+            self["loc"][2][0] += self["size"]*2
+        if self["shape"] == 'Z' and self["rotate"] == 1:
+            #self["loc"][0][1] += self["size"]
+            self["loc"][1][0] += self["size"]
+            self["loc"][1][1] -= self["size"]
+            self["loc"][2][0] += self["size"]
+            self["loc"][3][1] += self["size"]
         if self["shape"] == 'Z' and self["rotate"] == 2:
-            self["loc"][0] = self["loc"][0]
+            #self["loc"][0] = self["loc"][0]
             self["loc"][1][0] += self["size"]
             self["loc"][2][0] += self["size"]
             self["loc"][2][1] += self["size"]
             self["loc"][3][1] += self["size"]
             self["loc"][3][0] += self["size"]*2
         if self["shape"] == 'J' and self["rotate"] == 1:
-            self["loc"][0][0] += self["size"]
-            self["loc"][1][0] += self["size"]
-            self["loc"][1][1] += self["size"]
-            self["loc"][2][1] += self["size"]*2
+            #self["loc"][0][0] += self["size"]
             self["loc"][3][0] += self["size"]
-            self["loc"][3][1] += self["size"]*2
+            self["loc"][1][0] += self["size"]
+            self["loc"][1][1] -= self["size"]
+            self["loc"][2][0] += self["size"]
+            self["loc"][2][1] -= self["size"]*2
+            #self["loc"][3][1] += self["size"]*2
         if self["shape"] == 'J' and self["rotate"] == 2:
             self["loc"][0] = self["loc"][0]
             self["loc"][1][1] += self["size"]
@@ -75,26 +76,26 @@ def change_shape(self):
             self["loc"][3][0] += self["size"]*2
             self["loc"][3][1] += self["size"]
         if self["shape"] == 'J' and self["rotate"] == 3:
-            self["loc"][0] = self["loc"][0]
+            #self["loc"][0] = self["loc"][0]
             self["loc"][1][0] += self["size"]
             self["loc"][2][1] += self["size"]
             self["loc"][3][1] += self["size"]*2
         if self["shape"] == 'J' and self["rotate"] == 4:
-            self["loc"][0] = self["loc"][0]
+            #self["loc"][0] = self["loc"][0]
             self["loc"][1][0] += self["size"]
             self["loc"][2][0] += self["size"]*2
             self["loc"][3][0] += self["size"]*2
             self["loc"][3][1] += self["size"]
         if self["shape"] == "I" and self["rotate"] == 1:
-            self["loc"][0] = self["loc"][0]
-            self["loc"][1][1] += self["size"]
-            self["loc"][2][1] += self["size"]*2
-            self["loc"][3][1] += self["size"]*3
+            #self["loc"][0] = self["loc"][0]
+            self["loc"][1][1] -= self["size"]
+            self["loc"][2][1] += self["size"]
+            self["loc"][3][1] += self["size"]*2
         if self["shape"] == "I" and self["rotate"] == 2:
-            self["loc"][0] = self["loc"][0]
-            self["loc"][1][0] += self["size"]
-            self["loc"][2][0] += self["size"]*2
-            self["loc"][3][0] += self["size"]*3
+            #self["loc"][0] = self["loc"][0]
+            self["loc"][1][0] -= self["size"]
+            self["loc"][2][0] += self["size"]
+            self["loc"][3][0] += self["size"]*2
         
         self["full_size"] = self["loc"][3][1]
 
